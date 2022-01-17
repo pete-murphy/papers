@@ -6,6 +6,9 @@
 
 module TypeClassesWithFunctionalDependencies where
 
+import Prelude hiding (Num (..))
+import qualified Prelude
+
 -- A particular novelty of this paper is the application of ideas from the theory
 -- of relational databases to the design of type systems.
 
@@ -78,3 +81,24 @@ class Collects'' e c | c -> e where
   empty'' :: c e
   insert'' :: e -> c e -> c e
   member'' :: e -> c e -> Bool
+
+class D a b | a -> b
+
+-- A more flexible approach than Num type class
+class Add a b c | a b -> c where
+  (+) :: a -> b -> c
+
+class Mul a b c | a b -> c where
+  (*) :: a -> b -> c
+
+instance Mul Int Int Int where
+  (*) = (Prelude.*)
+
+instance Mul Int Float Float where
+  n * f = (Prelude.*) (fromIntegral n) f
+
+instance Mul Float Int Float where
+  f * n = (Prelude.*) f (fromIntegral n)
+
+instance Mul Float Float Float where
+  (*) = (Prelude.*)

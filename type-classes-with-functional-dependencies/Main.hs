@@ -4,7 +4,7 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE TypeApplications #-}
 
-module TypeClassesWithFunctionalDependencies where
+module Main where
 
 import Prelude hiding (Num (..))
 import qualified Prelude

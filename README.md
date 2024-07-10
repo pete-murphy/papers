@@ -1,8 +1,6 @@
 # papers
 
-Should be able to build the projects with `cabal build` and then run `ghcid` for a given project with
-
+```sh
+nix shell nixpkgs#just nixpkgs#haskellPackages.ghcid
+just repl defunctionalize-the-continuation # for example
 ```
-./do.sh PROJECT [MODULE]
-```
-e.g., `./do.sh declarative-uis UI`

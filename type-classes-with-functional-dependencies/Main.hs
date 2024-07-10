@@ -7,7 +7,7 @@
 module Main where
 
 import Prelude hiding (Num (..))
-import qualified Prelude
+import Prelude qualified
 
 -- A particular novelty of this paper is the application of ideas from the theory
 -- of relational databases to the design of type systems.
@@ -46,7 +46,7 @@ f x y coll = insert x (insert y coll)
 -- This compiles but shouldn't!
 g coll = f True 'a' coll
 
-instance Eq e => Collects e [e] where
+instance (Eq e) => Collects e [e] where
   empty = []
   insert = (:)
   member = elem
@@ -67,7 +67,7 @@ class Collects' e c where
 -- instance Eq e ⇒ Collects e (e → Bool ) where
 newtype CharFun e = MkCharFun (e -> Bool)
 
-instance Eq e => Collects' e CharFun where
+instance (Eq e) => Collects' e CharFun where
   empty' = MkCharFun (const False)
   insert' e (MkCharFun f) = MkCharFun (\e' -> e == e' || f e')
   member' e (MkCharFun f) = f e
@@ -102,3 +102,5 @@ instance Mul Float Int Float where
 
 instance Mul Float Float Float where
   (*) = (Prelude.*)
+
+main = pure ()
